@@ -5,16 +5,19 @@
 
 ## How to Build on Linux
 
-Run:
-```bash
-sudo docker run --rm -e PLAT=manylinux2014_x86_64 -v `pwd`:/io quay.io/pypa/manylinux2014_x86_64 /io/build-wheels.sh
+On x86-64:
+From the directory run
 ```
-
-You will need to rename the built files to a valid name:
-
-```bash
-mv gtsam-4.1.0-cp36-cp36m-manylinux2014_x86_64.none-manylinux2014_x86_64.whl gtsam-4.1.0-cp36-none-any.whl
+docker run --rm -e PYTHON_VERSION=cp38-cp38 -e PLAT=manylinux2014_x86_64 -v `pwd`:/io quay.io/pypa/manylinux2014_x86_64 bash -c 'cd /io; ./fix-wheels.sh; ./build-wheels-new.sh'
 ```
+The wheel should be available in the directory `wheelhouse`
+
+On aarch:
+From the directory run
+```
+docker run --rm -e PYTHON_VERSION=cp38-cp38 -e PLAT=manylinux2014_aarch64 -v `pwd`:/io quay.io/pypa/manylinux2014_aarch64 bash -c 'cd /io; ./fix-wheels.sh; ./build-wheels-new.sh'
+```
+The wheel should be available in the directory `wheelhouse`
 
 ## How to Build on macOS
 
