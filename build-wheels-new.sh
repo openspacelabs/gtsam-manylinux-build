@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Clone GTSAM
-GTSAM_BRANCH="4.2a9"
+GTSAM_BRANCH="os-updates"
 git clone https://github.com/openspacelabs/gtsam.git -b $GTSAM_BRANCH /gtsam
 
 # Set the build directory
