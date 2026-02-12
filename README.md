@@ -8,14 +8,16 @@
 On x86-64:
 From the directory run
 ```
-docker run --rm -e PYTHON_VERSION=cp38-cp38 -e PLAT=manylinux2014_x86_64 -v `pwd`:/io quay.io/pypa/manylinux2014_x86_64 bash -c 'cd /io; ./fix-wheels.sh; ./build-wheels-new.sh'
+docker run --rm -e PYTHON_VERSION=cp311-cp311 -e PLAT=manylinux2014_x86_64 -v `pwd`:/io quay.io/pypa/manylinux2014_x86_64 bash -c 'cd /io; ./fix-wheels.sh; ./build-wheels-new.sh'
 ```
-The wheel should be available in the directory `wheelhouse`
+`fix-wheels.sh` prepares build dependencies and applies a legacy auditwheel compatibility patch when needed.
+`build-wheels-new.sh` performs the wheel build and `auditwheel repair`.
+The final wheel should be available at `wheelhouse/gtsam-4.2a9-cp311-cp311-manylinux2014_x86_64.whl`.
 
 On aarch:
 From the directory run
 ```
-docker run --rm -e PYTHON_VERSION=cp38-cp38 -e PLAT=manylinux2014_aarch64 -v `pwd`:/io quay.io/pypa/manylinux2014_aarch64 bash -c 'cd /io; ./fix-wheels.sh; ./build-wheels-new.sh'
+docker run --rm -e PYTHON_VERSION=cp311-cp311 -e PLAT=manylinux2014_aarch64 -v `pwd`:/io quay.io/pypa/manylinux2014_aarch64 bash -c 'cd /io; ./fix-wheels.sh; ./build-wheels-new.sh'
 ```
 The wheel should be available in the directory `wheelhouse`
 
