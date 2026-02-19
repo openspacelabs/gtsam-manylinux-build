@@ -122,8 +122,17 @@ fi
 source_wheel="${repaired_wheels[0]}"
 source_wheel_name="$(basename "$source_wheel")"
 
-if [[ "$source_wheel_name" != gtsam-${EXPECTED_GTSAM_VERSION}-* ]]; then
-    echo "ERROR: Upstream produced unexpected version in wheel: $source_wheel_name (expected ${EXPECTED_GTSAM_VERSION})" >&2
+if [[ "$source_wheel_name" != gtsam-* ]]; then
+    echo "ERROR: Upstream produced unexpected wheel name format: $source_wheel_name (expected prefix gtsam-)" >&2
+    exit 1
+fi
+
+version_and_rest="${source_wheel_name#gtsam-}"
+wheel_version="${version_and_rest%%-*}"
+wheel_base_version="${wheel_version%%+*}"
+
+if [[ "$wheel_base_version" != "$EXPECTED_GTSAM_VERSION" ]]; then
+    echo "ERROR: Upstream produced unexpected wheel version: ${wheel_version} (expected base ${EXPECTED_GTSAM_VERSION}; local suffix +... is allowed)" >&2
     exit 1
 fi
 
