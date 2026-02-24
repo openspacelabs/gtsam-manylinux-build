@@ -6,8 +6,7 @@ set -x
 : "${PLAT:?PLAT is required (example: manylinux2014_x86_64)}"
 
 # Clone GTSAM
-# GTSAM_BRANCH="os-updates"
-GTSAM_BRANCH="codex/rebase-4.3a1-os-compat"
+GTSAM_BRANCH="os-updates"
 EXPECTED_GTSAM_VERSION="4.3a1"
 rm -rf /gtsam
 git clone --depth 1 https://github.com/openspacelabs/gtsam.git -b "$GTSAM_BRANCH" /gtsam
